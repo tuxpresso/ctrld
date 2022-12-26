@@ -6,41 +6,8 @@ use std::time::{Duration, Instant};
 use clap::Parser;
 use pid::{Pid, PidBuilder, PidGains, PidLimits};
 
-#[derive(Parser, Debug)]
-#[command()]
-struct Args {
-    /// Period in millis
-    #[arg(short)]
-    period_ms: u32,
-
-    /// Path to iio sysfs
-    #[arg(short)]
-    iio_path: String,
-
-    /// Address of pwm service
-    #[arg(short)]
-    addr: String,
-
-    /// Set point
-    #[arg(long)]
-    sp: f32,
-
-    /// Maximum temperature
-    #[arg(long)]
-    max: i32,
-
-    /// Proportional gain
-    #[arg(long)]
-    kp: f32,
-
-    /// Integral gain
-    #[arg(long)]
-    ki: f32,
-
-    /// Derivative gain
-    #[arg(long)]
-    kd: f32,
-}
+mod args;
+use crate::args::Args;
 
 fn main() {
     let args = Args::parse();
