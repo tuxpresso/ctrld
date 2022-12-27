@@ -3,11 +3,18 @@ use std::net::UdpSocket;
 use std::thread::sleep;
 use std::time::{Duration, Instant};
 
+use ciborium::ser::into_writer;
 use clap::Parser;
 use pid::Pid;
+use serde::Serialize;
 
 mod args;
 use crate::args::Args;
+
+#[derive(Serialize)]
+struct PwmMessage {
+    pulse_ms: u32,
+}
 
 fn main() {
     let args = Args::parse();
@@ -37,7 +44,13 @@ fn main() {
         };
         println!("{}", pulse_ms);
 
-        match sock.send_to(&pulse_ms.to_ne_bytes(), &args.addr) {
+        let mut buf: [u8; 1024] = [0; 1024];
+        let msg = PwmMessage { pulse_ms };
+
+        match into_writer(&msg, &mut buf[0..1024]) {
+            _ => (),
+        }
+        match sock.send_to(&buf, &args.addr) {
             _ => (),
         };
 
