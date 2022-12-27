@@ -4,7 +4,7 @@ use std::thread::sleep;
 use std::time::{Duration, Instant};
 
 use clap::Parser;
-use pid::{Pid, PidBuilder, PidGains, PidLimits};
+use pid::Pid;
 
 mod args;
 use crate::args::Args;
@@ -16,10 +16,11 @@ fn main() {
     sock.set_nonblocking(true)
         .expect("failed to set socket to nonblocking");
 
-    let gains = PidGains::new(args.kp, args.ki, args.kd);
     let limit = args.period_ms as f32;
-    let limits = PidLimits::new(limit, limit, limit, limit);
-    let mut pid = Pid::from(PidBuilder::new(gains, limits, args.sp));
+    let mut pid = Pid::new(args.sp, limit);
+    pid.p(args.kp, limit);
+    pid.i(args.ki, limit);
+    pid.d(args.kd, limit);
 
     let period = Duration::from_millis(args.period_ms.into());
     loop {

@@ -158,8 +158,8 @@ checksum = "9b7820b9daea5457c9f21c69448905d723fbd21136ccf521748f23fd49e723ee"
 
 [[package]]
 name = "pid"
-version = "3.0.0"
-source = "git+https://github.com/ahepp/pid-rs?branch=from#f671e28650eaf0e9515f349f89cef632ccd1368e"
+version = "4.0.0"
+source = "git+https://github.com/braincore/pid-rs#695e784a0f78b73e6a3005264eb15b5163011c43"
 dependencies = [
  "num-traits",
 ]
