@@ -7,14 +7,6 @@ pub struct Args {
     #[arg(short)]
     pub period_ms: u32,
 
-    /// Path to iio sysfs
-    #[arg(short)]
-    pub iio_path: String,
-
-    /// Address of pwm service
-    #[arg(short)]
-    pub addr: String,
-
     /// Set point
     #[arg(long)]
     pub sp: f32,
