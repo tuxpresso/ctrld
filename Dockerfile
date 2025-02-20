@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 RUN dpkg-reconfigure debconf -f noninteractive -p critical \
     && echo 'root:root' | chpasswd \
