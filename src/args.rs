@@ -26,4 +26,8 @@ pub struct Args {
     /// Derivative gain
     #[arg(long)]
     pub kd: f32,
+
+    /// Test
+    #[arg(short)]
+    pub verbose: bool,
 }
